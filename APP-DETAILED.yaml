@@ -1,0 +1,30 @@
+# REMEMBER  ==  source destination   syncPolicy
+
+
+
+
+
+
+apiVersion: argoproj.io/v1alpha1 
+kind: Application
+metadata:
+  name: my-sample-app                       # Unique name for this Argo CD Application 
+  namespace: argocd                         # Application OBJECT belongs to the Argo CD namespace, so argo can handle them.
+  project: default # The Argo CD Application Project this Application is associated with. Defaults to 'default' if not specified.
+
+  source: 
+    repoURL: 'https://github.com/myorg/my-app-manifests.git'
+    targetRevision: HEAD                    # The Git revision (branch, tag, commit SHA) to use. 'HEAD' usually means the latest commit on the default branch.
+    path: 'deploy/production'               # Path within the repository 
+
+  destination:                              # target Kubernetes cluster and namespace for deployment.
+    server: 'https://kubernetes.default.svc' 
+    namespace: my-app-namespace              # The Kubernetes namespace where the application resources will be deployed.
+
+
+  syncPolicy:                               # synchronizes the desired state with the actual cluster state.
+    automated: # Enables automated synchronization.
+      prune: true # Automatically deletes resources in the cluster that are no longer present in the source manifests.
+      selfHeal: true # Automatically reverts any manual changes made to the resources in the cluster to match the desired state in the source.
+    syncOptions: # Defines additional options for the synchronization process.
+    - CreateNamespace=true                  # Tells Argo CD to create the destination namespace if it doesn't exist.
