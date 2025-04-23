@@ -1,9 +1,8 @@
+link ArgoCD Demo from scratch (in Hindi) | ArgoCD Crash Course | Part-2  -     https://youtu.be/quwSXsECTIU?si=KN5UOI0YdlcWL8gT
+
+
+
 # REMEMBER  ==  source destination   syncPolicy
-
-
-
-
-
 
 apiVersion: argoproj.io/v1alpha1 
 kind: Application
