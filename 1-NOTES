@@ -1,0 +1,109 @@
+traditional cicd process
+-  cd traditional push based approach using kubectl commads
+ 
+problems
+1)  Configuration Drift =manual changes on app
+2)   Rollback is difficult and takes time
+3)  security issues exposing credentials outside of ur cluster( service account tokens or kubeconfig files)
+
+
+what is GITOPS ===
+
+-  Def: DevOps practice using Git as single source of truth for infrastructure/app deployment.
+
+prob soluion gitops gave/FEATURES-
+1) Eliminates Configuration Drift- Git = single source of truth
+2)  Rollback easy - Rollbacks via Git revert.
+3) Requires PR-based changes for collaboration/audit.
+4) -  one gitops can deploy cluster on multiple cluster although operator doesnot necessarily reside into other cluster
+- GitOps Exists Because: Automation + Git fixHUMAN ERROR & CHAOS in deployments.
+
+
+gitops principle
+
+1) declarative code IN GIT (version control and immutabilty)
+2) gitops operator pulls desired state from git and apply them in one or more cluster
+3) reconcillation —-> gitops operator also makes sure that entire system is self healing —-> reduce risk of human errors  operator continuously loops through three steps 
+1—> observe 2——> diff 3——> act
+
+
+devops vs gitops DIFF == REMEMBER(2 REPO + PULL)
+devops:—
+-  in devops only one git repo for source code 
+-  in devops changes pushed to k8 cluster
+
+gitops:——>
+-  gitops essentially two pipelines
+             1) app code 
+             2) k8 manifest 
+-  gitops changes PULLED by gitops operator
+
+
+
+
+argocd architecture 
+
+1. Git Repository (Source of Truth)--- Argo CD  monitors the repository
+2. Argo CD Server  --- entry point for users to interact
+3. Argo CD Controller --- syncs the application’s desired state (from Git) with the actual state
+4. Kubernetes Cluster (Target)  ---- where the application is deployed
+5.  Application CRDs (Custom Resource Definitions)  ---defines how to deploy an application in a cluster, including the Git repository to sync from and the destination cluster and namespace.
+6. dex — Dex is an OpenID Connect (OIDC) identity provider integrates with LDAP, GitHub, or Google
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
