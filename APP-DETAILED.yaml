@@ -27,4 +27,7 @@ metadata:
       prune: true # Automatically deletes resources in the cluster that are no longer present in the source manifests.
       selfHeal: true # Automatically reverts any manual changes made to the resources in the cluster to match the desired state in the source.
     syncOptions: # Defines additional options for the synchronization process.
-    - CreateNamespace=true                  # Tells Argo CD to create the destination namespace if it doesn't exist.
+    - CreateNamespace=true # Tells Argo CD to create the destination namespace if it doesn't exist.
+    - ApplyOutOfSync=true # Allows Argo CD to apply resources even if they are considered out-of-sync. Use with caution as it can mask configuration drift.
+    - ServerSideApply=true # Uses Kubernetes server-side apply for managing resources, which can improve conflict resolution.
+    - RespectIgnoreDifferences=true # Instructs Argo CD to respect any `ignoreDifferences` configurations defined in the Application.
